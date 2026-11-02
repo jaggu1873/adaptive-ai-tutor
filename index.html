@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#071426" />
+    <title>Adaptive Tutor — Virtual Classroom</title>
+  </head>
+  <body>
+    <div id="app">
+      <aside class="sidebar">
+        <div class="brand"><span class="brand-mark">✦</span><div><strong>LOCAL TEACHER</strong><small>PERSONAL CLASSROOM</small></div></div>
+        <div class="nav-label">CLASSROOM</div>
+        <button class="nav-item active" data-panel="lesson"><span>▣</span> Live lesson</button>
+        <button class="nav-item" data-panel="questions"><span>◇</span> Questions</button>
+        <button class="nav-item" data-panel="memory"><span>✧</span> Memory aids</button>
+        <button class="nav-item" data-panel="progress"><span>▥</span> My progress</button>
+        <div class="sidebar-bottom"><div class="status-dot"></div><div><strong>Classroom ready</strong><small>Prototype · Local browser</small></div></div>
+      </aside>
+
+      <main class="workspace">
+        <header class="topbar">
+          <div><div class="eyebrow">YOUR PERSONAL LOCAL TEACHER</div><h1>Welcome to your classroom</h1></div>
+          <div class="topic-pill"><span class="live-dot"></span> LESSON 01 <b>·</b> Neural Networks</div>
+        </header>
+
+        <section class="classroom-card">
+          <div class="scene-heading"><div><span class="scene-kicker">3D VIRTUAL CLASSROOM</span><h2>Learn by seeing and doing.</h2></div><div class="scene-tip">Drag to look around · Scroll to zoom</div></div>
+          <div id="scene-container" aria-label="Interactive 3D classroom with human-like virtual teacher and whiteboard"></div>
+          <div class="scene-caption" aria-live="polite"><span class="caption-orb">✦</span><div><strong id="teacher-status">Your virtual teacher is ready.</strong><small id="teacher-substatus">Start the lesson when you are ready.</small></div><span class="ready-badge" id="classroom-badge"><i></i> READY</span></div>
+        </section>
+
+        <section class="lower-grid">
+          <article class="panel lesson-panel">
+            <div class="panel-heading"><div><span class="panel-kicker">TODAY'S LESSON</span><h3 id="lesson-title">What is an artificial neuron?</h3></div><span class="step-count" id="step-count">01 / 03</span></div>
+            <p id="lesson-description">A neuron takes inputs, gives each input a weight, adds a bias, and passes the result through an activation function.</p>
+            <div class="equation-box"><span class="equation-label">KEY EQUATION</span><div id="equation">z = w₁x₁ + w₂x₂ + b</div></div>
+            <label class="voice-picker"><span>TEACHER VOICE</span><select id="voice-select" aria-label="Choose teacher voice"><option value="">Automatic · clearest English voice</option></select></label>
+            <label class="rate-picker" for="voice-rate"><span>Speech pace</span><input id="voice-rate" type="range" min="0.75" max="1.1" step="0.05" value="0.88"><output id="voice-rate-value">0.88×</output></label>
+            <div class="button-row lesson-controls">
+              <button class="primary-button" id="start-lesson">▶ &nbsp; Teach this lesson</button>
+              <button class="secondary-button" id="pause-lesson" disabled>Ⅱ Pause</button>
+              <button class="secondary-button" id="stop-lesson">■ Stop</button>
+              <button class="secondary-button" id="repeat-step">↻ Repeat step</button>
+              <button class="secondary-button" id="next-lesson-step">Next step&nbsp; →</button>
+              <button class="secondary-button" id="resume-lesson" hidden>Resume lesson</button>
+              <button class="secondary-button" id="next-step">Next concept&nbsp; →</button>
+            </div>
+          </article>
+          <article class="panel interaction-panel">
+            <div class="panel-heading"><div><span class="panel-kicker">TEACHER'S TOOLKIT</span><h3>Learn actively</h3></div><span class="sparkle">✦</span></div>
+            <button class="tool-row" id="ask-question"><span class="tool-icon question-icon">?</span><span><strong>Ask me a question</strong><small>Check what you understand</small></span><span class="tool-arrow">→</span></button>
+            <button class="tool-row" id="memory-aid"><span class="tool-icon memory-icon">✧</span><span><strong>Give me a memory trick</strong><small>Make the idea easier to remember</small></span><span class="tool-arrow">→</span></button>
+            <button class="tool-row" id="stop-speaking" aria-label="Pause or resume the teacher's voice" disabled><span class="tool-icon voice-icon">Ⅱ</span><span><strong>Pause the teacher's voice</strong><small>Pause or resume the explanation</small></span><span class="tool-arrow">→</span></button>
+            <div class="source-tools">
+              <label for="pdf-upload">OPTIONAL PDF SOURCE</label>
+              <input id="pdf-upload" type="file" accept="application/pdf,.pdf">
+              <label class="visual-mode-label" for="visual-mode">PRESENTATION MODE</label>
+              <select id="visual-mode" aria-label="Choose lesson visual presentation">
+                <option value="lesson">Generated lesson board</option>
+                <option value="pdf" disabled>Uploaded PDF page</option>
+              </select>
+              <div class="pdf-page-controls">
+                <label for="pdf-page">Page</label>
+                <input id="pdf-page" type="number" min="1" value="1" disabled>
+                <button class="secondary-button" id="show-pdf-page" disabled>Show page</button>
+              </div>
+              <div id="pdf-status" class="source-status" role="status">PDF text and questions stay in this browser. Rule-based teaching uses extracted text only.</div>
+              <canvas id="pdf-page-preview" aria-label="Selected PDF page preview" hidden></canvas>
+            </div>
+            <div class="question-tools">
+              <label for="student-question">ASK ABOUT THIS PDF</label>
+              <textarea id="student-question" rows="3" maxlength="4000" placeholder="Ask about this lesson or the uploaded source…"></textarea>
+              <p class="local-privacy-note">Rule-based mode: PDF text and questions are processed locally. No API key or AI provider is used.</p>
+              <button class="secondary-button" id="ask-text-question">Ask teacher locally</button>
+            </div>
+            <div class="interaction-output" id="interaction-output" aria-live="polite">Choose an activity and your teacher will guide you.</div>
+          </article>
+        </section>
+        <footer>BUILT FOR CURIOUS MINDS <span>·</span> LOCAL RULE-BASED TUTOR <span>·</span> EARLY PROTOTYPE</footer>
+      </main>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

@@ -86,10 +86,17 @@ def generate_snapshots(events):
             axis=1
         )
 
+        # Remove duplicate column names created during JSON normalization
+        answers = answers.loc[:, ~answers.columns.duplicated()]
+
         explanations = pd.concat(
             [explanations.drop(columns="data"), explanation_data],
             axis=1
         )
+
+        explanations = explanations.loc[
+            :, ~explanations.columns.duplicated()
+        ]
 
         # ------------------------------------
         # Separate assessment types
